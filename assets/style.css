@@ -1,0 +1,66 @@
+#body {
+    background-image: url(train-tracks-to-the-horizon-landscape.jpg);
+    background-color: azure;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#header {
+    font-family: 'Raleway', sans-serif;
+}
+.navbar-text {
+    margin-left: 35%;
+}
+#train-schedule {
+    border: solid 1px rgb(48, 41, 94);
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(247, 247, 247);
+    width: 80%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+#train-schedule-header {
+    background-color: rgb(48, 41, 94);
+    color: azure;
+    font-size: 14pt;
+}
+#input-form {
+    border: solid 1px rgb(48, 41, 94);
+    border-radius: 5px;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(247, 247, 247);
+    width: 80%;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+#add-train-header {
+    background-color: rgb(48, 41, 94);
+    color: azure;
+    font-size: 14pt;
+}
+#labelTrainName {
+    margin-top: 10px;
+}
+#trainNameInput {
+    margin-bottom: 15px;
+}
+#destinationInput {
+    margin-bottom: 15px;
+}
+#trainTimeInput {
+    margin-bottom: 15px;
+}
+#frequencyInput {
+    margin-bottom: 15px;
+}
+#submit {
+    margin-bottom: 10px;
+    font-family: 'Raleway', sans-serif;
+    background-color: rgb(48, 41, 94);
+    border: rgb(48, 41, 94);
+}
