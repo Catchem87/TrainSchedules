@@ -28,7 +28,7 @@
     <div class="card" id="train-schedule">
         <div class="card-header" id="train-schedule-header">Current Train Schedule</div>
             <div class="card-body">
-                <table class="table">
+                <table class="table" id="timetable">
                     <thead>
                         <tr>
                             <th scope="col">Train Name</th>
@@ -45,7 +45,7 @@
     <div class="card" id="input-form">
         <div class="card-header" id="add-train-header">Add Train</div>
             <div class="card-body">
-                <form>
+                <form id="form">
                     <div class="form-group">
                         <label for="trainNameInput" id="labelTrainName"><strong>Train Name</strong></label>
                         <input type="text" class="form-control" id="trainNameInput" placeholder="Oregon Trail">
@@ -66,6 +66,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="assets/logic.js" type="text/javascript"></script>
+    <script src="assets/moment.js" type="text/javascript"></script>
     
 
 </body>
