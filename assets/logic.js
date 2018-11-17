@@ -12,9 +12,6 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 
-var nextArrival = "";
-var minutesAway = "";
-
 $('#submit').on('click', function(event) {
     //Prevent the page from refreshing
     event.preventDefault();
@@ -25,10 +22,12 @@ $('#submit').on('click', function(event) {
     firstTrain = $('#trainTimeInput').val().trim();
     frequency = $('#frequencyInput').val().trim();
 
+
     var train = {
         'name': trainName,
         'destination': destination,
-        'first train': firstTrain,
+        'firstTrain': moment(firstTrain, 'HH:mm').format('hh:mm a'),
+        'firstTrainUnix': moment(firstTrain, 'HH:mm').format('x'),
         'frequency': frequency,
     }
     console.log(train);
@@ -43,16 +42,38 @@ $('#submit').on('click', function(event) {
 database.ref().on('child_added', function(snapshot){
     var name = snapshot.val().name
     var destination = snapshot.val().destination
-    var frequency = snapshot.val().frequency
-    var time = moment(snapshot.val().firstTrain, 'HH:mm').format('hh:mm a')
-    var table = $('#timetable')
-
+    var frequency = parseInt(snapshot.val().frequency)
+    var time = snapshot.val().firstTrain
+    var unixTime = snapshot.val().firstTrainUnix
+    console.log(time)
+    console.log(unixTime)
     
+    var firstTrainUnix = moment(unixTime, 'x')
+  
+    var minutesUntilTrain = firstTrainUnix.diff(moment(), 'minutes')
+    if(minutesUntilTrain <= 0) {
+        while(minutesUntilTrain <= 0) {
+            minutesUntilTrain += frequency
+            firstTrainUnix.add(frequency, 'minutes')
+            time = firstTrainUnix.format('hh:mm a')
+        }
+    }
+    console.log(minutesUntilTrain)
+
+
+    var table = $('#timetable')
 
     
     var $newTrain = $('<tr>')
 
-    $newTrain.html('<td>' + name + '</td><td>' + destination + '</td><td>' + frequency + '</td><td>' + "" + '</td><td>' + "" + '</td>')
+    $newTrain.html('<td>' + name + '</td><td>' + destination + '</td><td>' + frequency + '</td><td>' + time + '</td><td>' + minutesUntilTrain + '</td>')
 
     table.append($newTrain)
+
+    if(minutesUntilTrain <= 0) {
+        time = (time + frequency)
+        unixTime = moment(time, 'HH:mm').format('x')
+        minutesUntilTrain = moment(unixTime, 'x').diff(moment(), 'minutes')
+        table.append($newTrain)
+    }
 })
